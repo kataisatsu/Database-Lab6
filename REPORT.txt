@@ -1,0 +1,19 @@
+REPORT
+ROLE:
+As always, similar to the previous labs, everyone had an important role to play, regarding understanding, implementation and explaining, but this time we required the help of one of our collegues Ismaili Zakaria that greatly helped us regarding Part 3 (E and F).
+Difficulties:
+• Query 20. We did not know how to write it the way the lab asked. We wrote it using IN twice. It gave the right answer, but the question says "using a set operation", and IN is a nested query, not a set operation. The set operations in the course are UNION, INTERSECT and EXCEPT (the slide 54 of the last course material). We did not find how to get the same result with a set operation, so we kept the IN version, which still gives the correct result. We tried but could not find an answer
+• Division (Query 24). We counted, for each model and person, how many required certifications the person holds, and kept the pair when it equals the number the model requires.
+• Test data that gave empty results. At first Task 7 changed nothing (no project was Cancelled), Query 14 was empty (no lab had more than 3 units) and Query 22 was empty (every unit was reserved). As we can maybe see by the screenshots that are present, fortunally we managed to find the issue and corrected it but kept the screenshot as it is due a lack of time and just in some sort have it as a checkpoint of our progression while doing this lab.
+ON DELETE choices:
+After a bit of research and revision we followed this rules to apply the on delete choiuces:
+CASCADE:The row means nothing without its parent, so it is deleted with it.
+NO ACTION:Deleting the parent would lose history or leave a required value empty, so the delete is refused until the rows that use it are changed first.
+SET NULL:The approver is optional: if the approver is deleted, the reservation stay and only the approver becomes empty.
+ASSUMPTIONS:
+• Recording a consumption does not reduce the stock by itself.
+• Some names, emails and suppliers are invented for testing, and others are real names such as the names of our group.
+OPEN QUESTIONS:
+1. Administrative staff. Administrative employees cannot make reservations or participate in projects. A foreign key can check that something exists, but not that a person is NOT in the Administrative table.
+2. Certifications and one user at a time. A person can only reserve a unit if they hold all the certifications its model requires, and a unit cannot be used by two people at the same time. Both rules compare several rows of Requires, Holds and Reservation.
+3. "Exactly one" and "at least one". A person must be a Student or an Employee but not both, every student needs at least one advisor, and every project and laboratory needs at least one budget. Separate tables cannot stop a person from being in both subclasses, and a foreign key cannot force another table to have a mattching row.
